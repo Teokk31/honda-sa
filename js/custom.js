@@ -83,7 +83,7 @@
             var $container = $('.work-filter');
             var $filter = $('#menu-filter');
             $container.isotope({
-                filter: '*',
+                filter: '.accord',
                 layoutMode: 'masonry',
                 animationOptions: {
                     duration: 750,
