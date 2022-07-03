@@ -612,6 +612,7 @@ button:focus {
     border: 1px solid #efefef;
     position: relative;
     overflow: hidden;
+    height: 520px;
 }
 
 .read_more a {
@@ -1000,6 +1001,7 @@ button:focus {
     position: relative;
     overflow: hidden;
     border-radius: 15px !important;
+    height: 660px;
 }
 
 .testi_boxes .testi_img img {
