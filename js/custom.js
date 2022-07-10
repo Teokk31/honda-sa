@@ -203,7 +203,7 @@
 
                 $('div.happenings').append(
                     `<div class="col-lg-4">
-                    <div class="bg-white p-4 text-center mt-3">
+                    <div class="bg-white p-4 text-center mt-3 happening">
                     <div class="blog_img">
                                 <img src="${photoSrc}" alt="" class="img-fluid mx-auto d-block rounded">
                             </div>
