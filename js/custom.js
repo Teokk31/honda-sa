@@ -179,7 +179,7 @@
     },
 
     Dhrums.prototype.crawlHappenings = function() {
-        const url = "http://www.whateverorigin.org/get?url=" + encodeURIComponent("https://www.honda.com.my/happenings") + "&callback=?";
+        const url = "https://www.whateverorigin.org/get?url=" + encodeURIComponent("https://www.honda.com.my/happenings") + "&callback=?";
         $.getJSON(url, function(response) {  
             const splitFirstHalf = response.contents.split('<div class=\"details-container\">\n')[1];
             const finalSplit = splitFirstHalf.split('\n    </div>\n\n\n\n\n\n</section>\n</div>\n<script>\n')[0];
