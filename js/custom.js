@@ -178,6 +178,48 @@
         });
     },
 
+    Dhrums.prototype.crawlHappenings = function() {
+        const url = "http://www.whateverorigin.org/get?url=" + encodeURIComponent("https://www.honda.com.my/happenings") + "&callback=?";
+        $.getJSON(url, function(response) {  
+            const splitFirstHalf = response.contents.split('<div class=\"details-container\">\n')[1];
+            const finalSplit = splitFirstHalf.split('\n    </div>\n\n\n\n\n\n</section>\n</div>\n<script>\n')[0];
+            
+            const htmlObject = document.createElement('div');
+            htmlObject.innerHTML = finalSplit;
+            
+            const photosDiv = htmlObject.getElementsByClassName('photo');
+            const subTitlesDiv = htmlObject.getElementsByClassName('sub-title');
+            const descriptionsDiv = htmlObject.getElementsByClassName('body-copy');
+            for (let index = 0; index < photosDiv.length; index++) {
+                const photoDiv = photosDiv[index];
+                const photoUrl = photoDiv.children[0].href;
+                const photoSrc = photoDiv.children[0].children[0].src;
+
+                const subTitleDiv = subTitlesDiv[index];
+                const subTitle = subTitleDiv.innerText.trim();
+
+                const descriptionDiv = descriptionsDiv[index];
+                const description = descriptionDiv.innerText.trim();
+
+                $('div.happenings').append(
+                    `<div class="col-lg-4">
+                    <div class="bg-white p-4 text-center mt-3">
+                    <div class="blog_img">
+                                <img src="${photoSrc}" alt="" class="img-fluid mx-auto d-block rounded">
+                            </div>
+                            <div class="blog_detail rounded m-2">
+                                <h5 class="font-weight-bold"><a href="#" class="text-dark">${subTitle} </a></h5>
+                                <p class="mt-2 text-muted">${description}</p>
+                                <div class="blog_divider mx-auto d-block"></div>
+                                <a href="${photoUrl}" target="_blank" class="text-custom font-weight-bold blog_more">Read More</a>
+                            </div>
+                    </div>
+                    </div>`
+                );
+            }
+        });
+    },
+
     Dhrums.prototype.init = function() {
         this.initStickyAddMenu();
         this.initSmoothlyLink();
@@ -189,6 +231,7 @@
         this.initClientSlider();
         this.initPreLoader();
         this.initBackToTop();
+        this.crawlHappenings();
     },
     //init
     $.Dhrums = new Dhrums, $.Dhrums.Constructor = Dhrums
